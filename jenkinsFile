@@ -6,19 +6,16 @@ pipeline {
 	stages  {
 		stage('Compile Stage') {
 			steps {
-				sh "cd leagueapp"
 				sh "mvn clean compile"
 			}
 		}
 		stage('Testing Stage') {
 			steps {
-				sh "cd leagueapp"
 				sh "mvn test"
 			}
 		}
 		stage('Deployment Stage') {
 			steps {
-				sh "cd leagueapp"
 				sh "mvn deploy"
 			}
 		}
