@@ -40,6 +40,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.9.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -53,5 +58,11 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 	</build>
 </project>
