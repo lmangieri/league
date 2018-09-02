@@ -30,7 +30,7 @@ public class PlayerDAO {
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 				System.out.println("Before session.createQuery");
-				Query query = session.createQuery("select new Player(ID,NAME,NICK,EMAIL) from Player");
+				Query query = session.createQuery("select new Player(p.id ,p.name ,p.nick ,p.email) from Player p");
 				list = query.list();
 				System.out.println("After query.list");
 			} catch (Exception e) {
