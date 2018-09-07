@@ -8,6 +8,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>leagueapp</name>
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -46,23 +47,67 @@
 			<version>8.0.11</version>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<db.url>jdbc:mysql://localhost:3306/leaguedb?characterEncoding=utf8</db.url>
+				<db.username>admin2</db.username>
+				<db.password>samba123</db.password>
+			</properties>
+			<build>
+				<finalName>leagueappINTEGRATION</finalName>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>1.6</source>
+							<target>1.6</target>
+						</configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<filtering>true</filtering>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<db.url>jdbc:mysql://localhost:3316/leaguedb?characterEncoding=utf8</db.url>
+				<db.username>admin3</db.username>
+				<db.password>samba1234</db.password>
+			</properties>
+			<build>
+				<finalName>leagueappPROD</finalName>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>1.6</source>
+							<target>1.6</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.12.4</version>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<filtering>true</filtering>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
 
-	<build>
-		<finalName>leagueapp</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-		<resources>
-			<resource>
-				<filtering>true</filtering>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
-	</build>
 </project>
