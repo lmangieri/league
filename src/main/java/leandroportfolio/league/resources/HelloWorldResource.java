@@ -1,4 +1,4 @@
-package leandroportfolio.league.rest;
+package leandroportfolio.league.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
