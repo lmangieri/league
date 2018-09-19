@@ -57,11 +57,13 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.9.Final</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.9.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -71,6 +73,9 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
+	        <activation>
+	            <activeByDefault>true</activeByDefault>
+	        </activation>
 			<properties>
 				<db.url>jdbc:mysql://localhost:3306/leaguedb?characterEncoding=utf8</db.url>
 				<db.username>admin2</db.username>
@@ -122,6 +127,10 @@
 					</plugin>
 				</plugins>
 				<resources>
+					<resource>
+						<filtering>true</filtering>
+						<directory>src/main/resources</directory>
+					</resource>
 					<resource>
 						<filtering>true</filtering>
 						<directory>src/main/resources</directory>

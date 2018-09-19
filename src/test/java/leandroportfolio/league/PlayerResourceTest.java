@@ -5,9 +5,10 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 
+import leandroportfolio.league.dao.DummyClass;
+import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.PlayerResource;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
-
 import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.core.Application;
@@ -24,7 +25,7 @@ public class PlayerResourceTest extends JerseyTest {
 		return new ResourceConfig(PlayerResource.class);
 	}
 
-	@Test
+	//@Test
 	public void testCreatePlayer() {
 		CreatePlayerDto createPlayeDto = new CreatePlayerDto();
 		createPlayeDto.setEmail("email");
@@ -36,4 +37,15 @@ public class PlayerResourceTest extends JerseyTest {
 		
 		assertEquals("should return status 200", 200, output.getStatus());
 	}
+	
+	/*
+	@Test
+	public void testJPA() {
+		Player player = new Player();
+		player.setName("test654");
+		player.setEmail("email");
+		DummyClass dummy = new DummyClass();
+		dummy.createPlayer(player);
+		System.out.println("player criado");
+	}*/
 }

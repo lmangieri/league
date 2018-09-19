@@ -13,6 +13,10 @@ public class Player {
 		this.email = email;
 	}
 	
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue
 	private long id;

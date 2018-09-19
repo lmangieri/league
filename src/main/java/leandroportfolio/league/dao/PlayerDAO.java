@@ -16,7 +16,6 @@ public class PlayerDAO {
 		Session session = null;
 		
 		public PlayerDAO() {
-			
 			Configuration configuration = new Configuration();
 		    configuration.configure();
 		    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
