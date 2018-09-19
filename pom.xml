@@ -18,6 +18,7 @@
 	<dependencies>
 
 		<!-- Glassfish dependency used by junit tests -->
+		<!--  
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -27,14 +28,13 @@
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>${jersey.glassfish.version}</version>
-			<!-- <version>2.26-b08</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
 			<artifactId>jersey-test-framework-provider-jdk-http</artifactId>
 			<version>${jersey.glassfish.version}</version>
 		</dependency>
-
+		-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
