@@ -20,7 +20,9 @@ public class DummyClass {
     }
     
     public Player createPlayer(Player player) {
+    	manager.getTransaction().begin();
     	manager.persist(player);
+    	manager.getTransaction().commit();
     	return player;
     }
 }

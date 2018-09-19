@@ -1,4 +1,4 @@
-package leandroportfolio.league;
+/*package leandroportfolio.league;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -38,7 +38,7 @@ public class PlayerResourceTest extends JerseyTest {
 		assertEquals("should return status 200", 200, output.getStatus());
 	}
 	
-	/*
+	
 	@Test
 	public void testJPA() {
 		Player player = new Player();
@@ -47,5 +47,6 @@ public class PlayerResourceTest extends JerseyTest {
 		DummyClass dummy = new DummyClass();
 		dummy.createPlayer(player);
 		System.out.println("player criado");
-	}*/
+	}
 }
+*/
