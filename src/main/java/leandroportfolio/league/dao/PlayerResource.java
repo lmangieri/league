@@ -1,4 +1,4 @@
-package leandroportfolio.league.resources;
+package leandroportfolio.league.dao;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 
-@Path("players")
+@Path("/players")
 public class PlayerResource {
 
 	@POST
