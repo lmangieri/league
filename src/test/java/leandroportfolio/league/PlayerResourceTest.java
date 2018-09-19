@@ -1,4 +1,4 @@
-/*package leandroportfolio.league;
+package leandroportfolio.league;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -6,8 +6,8 @@ import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 
 import leandroportfolio.league.dao.DummyClass;
-import leandroportfolio.league.dao.PlayerResource;
 import leandroportfolio.league.model.Player;
+import leandroportfolio.league.resources.PlayerResource;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 import static org.junit.Assert.assertEquals;
 
@@ -49,4 +49,3 @@ public class PlayerResourceTest extends JerseyTest {
 		System.out.println("player criado");
 	}
 }
-*/
