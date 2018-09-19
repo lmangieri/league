@@ -27,6 +27,7 @@ public class HelloWorldResource {
 
 	}
 	
+	/*
 	@GET
 	@Path("/test123/{param}")
 	public Response getMsg2(@PathParam("param") String msg) {
@@ -40,7 +41,7 @@ public class HelloWorldResource {
 		System.out.println("player criado");
 		return Response.status(200).entity("player criado").build();
 
-	}
+	}*/
 	
 	
 }
