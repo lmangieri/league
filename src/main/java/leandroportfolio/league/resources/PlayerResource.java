@@ -1,22 +1,64 @@
 package leandroportfolio.league.resources;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import leandroportfolio.league.resources.dto.CreatePlayerDto;
+import Beans.BeanExample;
+import leandroportfolio.league.dao.PlayerService;
+import leandroportfolio.league.model.Player;
 
-@Path("/players")
+@Controller
+@RequestMapping("hello")
 public class PlayerResource {
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public CreatePlayerDto createPlayer(CreatePlayerDto createPlayerBean) {
+	@Autowired
+	PlayerService playerService;
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public BeanExample getMsg() {
+			//@PathVariable("param") String msg
+        System.out.println( "Hello World!" );
+        /*
+        for(Player p : playerService.getAllPlayers()) {
+        	System.out.println("Player name = "+ p.getName());
+        }
 
-		return createPlayerBean;
+		String output = "Jersey sayyy : " + msg;
+         */
+        System.out.println("Not implemented yet.....");
+		BeanExample b = new BeanExample();
+		b.setName("name");
+		b.setAge("123");
+		
+		return b;
+
 	}
+	
+
+	@ResponseBody
+	@RequestMapping(value = "test123", method = RequestMethod.GET)
+	public BeanExample getMsg2(@PathVariable("param") String msg) {
+        System.out.println( "Hello World 2!" );
+        
+		Player player = new Player();
+		player.setName(msg);
+		player.setEmail(msg+"@mail.com");
+
+		playerService.createPlayer(player);
+		BeanExample b = new BeanExample();
+		b.setName(msg);
+		b.setAge("12345");
+		
+		return b;
+
+	}
+	
+	
 }
