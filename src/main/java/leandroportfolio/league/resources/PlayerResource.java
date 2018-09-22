@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import Beans.BeanExample;
-import leandroportfolio.league.dao.PlayerService;
+import leandroportfolio.league.dao.PlayerRepository;
 import leandroportfolio.league.model.Player;
 
 @Controller
@@ -16,7 +16,7 @@ import leandroportfolio.league.model.Player;
 public class PlayerResource {
 
 	@Autowired
-	PlayerService playerService;
+	PlayerRepository playerRepository;
 	
 	
 	
@@ -51,7 +51,7 @@ public class PlayerResource {
 		player.setName(msg);
 		player.setEmail(msg+"@mail.com");
 
-		playerService.createPlayer(player);
+		playerRepository.createPlayer(player);
 		BeanExample b = new BeanExample();
 		b.setName(msg);
 		b.setAge("12345");

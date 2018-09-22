@@ -3,25 +3,22 @@ package leandroportfolio.league.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
 
 import leandroportfolio.league.model.Player;
 
 @Service
-public class PlayerService {
-    //EntityManagerFactory factory = null;
-    //EntityManager manager = null;
+public class PlayerRepository {
 
-    
-    	//factory = Persistence.createEntityManagerFactory("leaguebd");
-    	//manager = factory.createEntityManager();
-    	
+	@PersistenceContext
+	private EntityManager em;
     
     public Player createPlayer(Player player) {
-    	/*manager.getTransaction().begin();
-    	manager.persist(player);
-    	manager.getTransaction().commit();*/
+    	em.getTransaction().begin();
+    	em.persist(player);
+    	em.getTransaction().commit();
     	return player;
     }
 }

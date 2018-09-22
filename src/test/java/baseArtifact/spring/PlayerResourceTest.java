@@ -1,7 +1,7 @@
 package baseArtifact.spring;
 
 import static org.junit.Assert.assertEquals;
-import leandroportfolio.league.dao.PlayerService;
+import leandroportfolio.league.dao.PlayerRepository;
 
 import org.junit.Before;
 import org.junit.Test;
