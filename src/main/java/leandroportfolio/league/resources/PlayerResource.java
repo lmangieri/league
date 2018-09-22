@@ -43,9 +43,9 @@ public class PlayerResource {
 	
 
 	@ResponseBody
-	@RequestMapping(value = "test123", method = RequestMethod.GET)
-	public BeanExample getMsg2(@PathVariable("param") String msg) {
-        System.out.println( "Hello World 2!" );
+	@RequestMapping(value = "test123/{param}", method = RequestMethod.GET)
+	public BeanExample getMsg2(@PathVariable(value="param") String msg) {
+        System.out.println( "Hello World 2!" );	
         
 		Player player = new Player();
 		player.setName(msg);
