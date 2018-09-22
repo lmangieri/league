@@ -16,6 +16,12 @@ public class PlayerRepository {
 	private EntityManager em;
     
     public Player createPlayer(Player player) {
+    	if(em == null) {
+    		System.out.println("EM Is null ...!!!!!!!!!!!!!!!!!");
+    	} else {
+    		System.out.println("EM is not null...");
+    	}
+    	
     	em.getTransaction().begin();
     	em.persist(player);
     	em.getTransaction().commit();
