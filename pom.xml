@@ -12,7 +12,6 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<junit.version>4.12</junit.version>
-		<jersey.glassfish.version>2.24.1</jersey.glassfish.version>
 		<spring.version>3.2.2.RELEASE</spring.version>
 	</properties>
 	<dependencies>
@@ -148,8 +147,8 @@
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
 						<configuration>
-							<source>1.6</source>
-							<target>1.6</target>
+							<source>${maven.compiler.target}</source>
+							<target>${maven.compiler.target}</target>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -181,8 +180,8 @@
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
 						<configuration>
-							<source>1.6</source>
-							<target>1.6</target>
+							<source>${maven.compiler.target}</source>
+							<target>${maven.compiler.target}</target>
 						</configuration>
 					</plugin>
 					<plugin>
