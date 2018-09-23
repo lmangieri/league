@@ -44,7 +44,7 @@ public class PlayerResourceTest {
 	}
 
 	
-	//@Test
+	@Test
 	public void doTestTwo() throws Exception {
 		MvcResult mvcResult = mockMvc.perform(get("/hello/test")).andExpect(status().isOk()).andReturn();
 		MockHttpServletResponse response = mvcResult.getResponse();
