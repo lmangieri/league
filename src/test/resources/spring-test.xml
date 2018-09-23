@@ -12,14 +12,13 @@
 
 	<!-- ================================================================================ 
 		Configuration ================================================================================ -->
-	<!-- 
+	
 	<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="classpath:application-${spring.profiles.active}.properties" />
+		<property name="location" value="classpath:application.properties" />
 	</bean>
 	
-
 	<context:property-placeholder properties-ref="properties" />
-	-->
+
 	
 	<!-- ================================================================================ 
 		Application ================================================================================ -->

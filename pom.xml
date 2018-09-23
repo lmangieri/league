@@ -153,6 +153,10 @@
 						<filtering>true</filtering>
 						<directory>src/main/resources</directory>
 					</resource>
+					<resource>
+						<filtering>true</filtering>
+						<directory>src/main/resources/env_dev</directory>
+					</resource>
 				</resources>
 				<testResources>
 					<testResource>
@@ -192,7 +196,7 @@
 					</resource>
 					<resource>
 						<filtering>true</filtering>
-						<directory>src/main/resources</directory>
+						<directory>src/main/resources/env_prod</directory>
 					</resource>
 				</resources>
 			</build>
