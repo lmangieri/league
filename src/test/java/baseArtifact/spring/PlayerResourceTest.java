@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -59,7 +60,7 @@ public class PlayerResourceTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void doTest3() throws Exception {
 		MvcResult mvcResult = mockMvc.perform(get("/hello/test123/123123123")).andExpect(status().isOk()).andReturn();
 		MockHttpServletResponse response = mvcResult.getResponse();

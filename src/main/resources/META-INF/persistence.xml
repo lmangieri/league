@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
- <persistence-unit name="leaguebd" transaction-type="JTA">
+ <persistence-unit name="leaguebd">
 
    <!-- provedor/implementacao do JPA -->
    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
@@ -12,15 +12,6 @@
    <class>leandroportfolio.league.model.Player</class>
 
    <properties>
-    <!-- dados da conexao -->
-     <property name="javax.persistence.jdbc.driver" 
-             value="com.mysql.jdbc.Driver" />
-    <property name="javax.persistence.jdbc.url" 
-            value="${db.url}" />
-    <property name="javax.persistence.jdbc.user" 
-            value="${db.username}" />
-    <property name="javax.persistence.jdbc.password" 
-            value="${db.password}" />
 
      <!--  propriedades do hibernate -->
      <property name="hibernate.dialect" 

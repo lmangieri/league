@@ -6,15 +6,18 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import leandroportfolio.league.model.Player;
 
 @Service
 public class PlayerRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="leaguebd")
 	private EntityManager em;
     
+	@Transactional(propagation = Propagation.REQUIRED)
     public Player createPlayer(Player player) {
     	if(em == null) {
     		System.out.println("EM Is null ...!!!!!!!!!!!!!!!!!");
@@ -22,9 +25,7 @@ public class PlayerRepository {
     		System.out.println("EM is not null...");
     	}
     	
-    	em.getTransaction().begin();
     	em.persist(player);
-    	em.getTransaction().commit();
     	return player;
     }
 }
