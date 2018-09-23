@@ -59,4 +59,11 @@ public class PlayerResourceTest {
 		
 	}
 	
+	@Test
+	public void doTest3() throws Exception {
+		MvcResult mvcResult = mockMvc.perform(get("/hello/test123/123123123")).andExpect(status().isOk()).andReturn();
+		MockHttpServletResponse response = mvcResult.getResponse();
+		
+	}
+	
 }
