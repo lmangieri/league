@@ -26,6 +26,7 @@ public class PlayerRepository {
     	}
     	
     	em.persist(player);
+    	
     	return player;
     }
 }
