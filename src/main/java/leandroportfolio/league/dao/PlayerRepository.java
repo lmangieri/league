@@ -14,7 +14,7 @@ import leandroportfolio.league.model.Player;
 @Service
 public class PlayerRepository {
 
-	@PersistenceContext(unitName="leaguebd")
+	@PersistenceContext
 	private EntityManager em;
     
 	@Transactional(propagation = Propagation.REQUIRED)
