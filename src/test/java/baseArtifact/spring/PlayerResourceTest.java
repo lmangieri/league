@@ -2,6 +2,8 @@ package baseArtifact.spring;
 
 import static org.junit.Assert.assertEquals;
 import leandroportfolio.league.dao.PlayerRepository;
+import leandroportfolio.league.model.Player;
+import leandroportfolio.league.resources.dto.CreatePlayerDto;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -9,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -22,6 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import Beans.BeanExample;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -47,40 +51,63 @@ public class PlayerResourceTest {
     private WebApplicationContext context;	
 
 	private MockMvc mockMvc;
+	
+	@Autowired PlayerRepository playerRepository;
 
 	@Before
 	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
-
-	/*
-	@BeforeClass
-	public static void createSchema() throws Exception {
-		RunScript.execute("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
-		                  "sa", "", "schema.sql", UTF8, false);
-	}	*/
 	
 	@Test
-	public void doTestTwo() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/hello/test")).andExpect(status().isOk()).andReturn();
+	@DatabaseSetup("/sampleData.xml")
+	public void createPlayerTestBasicFlow() throws Exception {
+		CreatePlayerDto bean = new CreatePlayerDto();
+		bean.setEmail("testEmail@mail.com");
+		bean.setName("testName");
+		bean.setNick("testNick");
+		ObjectMapper objMapper = new ObjectMapper();
+		MvcResult mvcResult = mockMvc.
+				perform(post("/player")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objMapper.writeValueAsString(bean)
+				))
+				.andExpect(status().isOk())
+				.andReturn();
+		
 		MockHttpServletResponse response = mvcResult.getResponse();
+		Player p1 = objMapper.readValue(response.getContentAsString(),Player.class);
 		
-		String z = response.getContentAsString();
-		
-		ObjectMapper mapper = new ObjectMapper();
-		BeanExample bean = mapper.readValue(z, BeanExample.class);
-		
-		assertEquals(bean.getAge(), "123");
-		assertEquals(bean.getName(),"name");
-		
+		Player p2 = playerRepository.getPlayer("testEmail@mail.com");
+
+		assertEquals(p1,p2);
 	}
 	
 	@Test
 	@DatabaseSetup("/sampleData.xml")
-	public void doTest3() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/hello/test123/123123123")).andExpect(status().isOk()).andReturn();
-		MockHttpServletResponse response = mvcResult.getResponse();
+	public void createTwoPlayersWithSameEmail() throws Exception {
+		CreatePlayerDto bean = new CreatePlayerDto();
+		bean.setEmail("testEmail@mail.com");
+		bean.setName("testName");
+		bean.setNick("testNick");
+		ObjectMapper objMapper = new ObjectMapper();
+		MvcResult mvcResult = mockMvc.
+				perform(post("/player")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objMapper.writeValueAsString(bean)
+				))
+				.andExpect(status().isOk())
+				.andReturn();
+		/*
+	    mvcResult = mockMvc.
+				perform(post("/player")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objMapper.writeValueAsString(bean)
+				))
+				.andExpect(status().isBadRequest())
+                .andReturn();
+        */
 		
 	}
-	
+		
 }

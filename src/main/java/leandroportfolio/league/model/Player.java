@@ -1,16 +1,16 @@
 package leandroportfolio.league.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="PLAYER")
 public class Player {
-	
-	public Player(long id,String name,String nick,String email) {
-		this.id = id;
-		this.name = name;
-		this.nick = nick;
-		this.email = email;
+	private Player(PlayerBuilder builder) {
+		this.name = builder.name;
+		this.nick = builder.nick;
+		this.email = builder.email;
 	}
 	
 	public Player() {
@@ -27,7 +27,7 @@ public class Player {
 	@Column(name="NICK")
 	private String nick;
 	
-	@Column(name="EMAIL")
+	@Column(name="EMAIL",unique=true)
 	private String email;
 	
 	public long getId() {
@@ -55,5 +55,41 @@ public class Player {
 		this.email = email;
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.email);
+	}
+	
+	@Override
+	public boolean equals(Object that) {
+		Player other = (Player)that;
+		System.out.println("equals result : "+this.email.equals(other.getEmail())) ;
+		return this.email.equals(other.getEmail());
+	}
+	
+	public static class PlayerBuilder {
+		private String name = null;
+		private String email = null;
+		private String nick = null;
+		
+		public PlayerBuilder name(final String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public PlayerBuilder email(final String email) {
+			this.email = email;
+			return this;
+		}
+		
+		public PlayerBuilder nick(final String nick) {
+			this.nick = nick;
+			return this;
+		}
+		
+		public Player build() {
+			return new Player(this);
+		}
+	}
 	
 }

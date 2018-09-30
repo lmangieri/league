@@ -1,5 +1,7 @@
 package leandroportfolio.league.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,14 +21,16 @@ public class PlayerRepository {
     
 	@Transactional(propagation = Propagation.REQUIRED)
     public Player createPlayer(Player player) {
-    	if(em == null) {
-    		System.out.println("EM Is null ...!!!!!!!!!!!!!!!!!");
-    	} else {
-    		System.out.println("EM is not null...");
-    	}
-    	
     	em.persist(player);
-    	
     	return player;
     }
+	
+	public Player getPlayer(final String email) {
+		List<Player> players = em.createQuery("select p from Player p where p.email = :email",Player.class)
+			.setParameter("email",email)
+			.getResultList();
+		
+		// TODO: verificar se não encontrou ninguém....
+		return players.get(0);
+	}
 }
