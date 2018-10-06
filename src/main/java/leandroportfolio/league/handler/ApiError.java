@@ -14,4 +14,8 @@ public class ApiError {
 	public HttpStatus getStatus() {
 		return this.status;
 	}
+	
+	public String getErrorCode() {
+		return this.errorCode;
+	}
 }
