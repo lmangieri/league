@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import Beans.BeanExample;
 import leandroportfolio.league.dao.PlayerRepository;
-import leandroportfolio.league.handler.exceptions.EntityNotFoundException;
+import leandroportfolio.league.handler.exceptions.UserCreationException;
 import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 import leandroportfolio.league.service.PlayerService;
@@ -25,10 +25,7 @@ public class PlayerResource {
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes="application/json")
 	public Player createPlayer(@RequestBody CreatePlayerDto bean) {
-		if(true) {
-			throw new EntityNotFoundException();
-		}
-		System.out.println("Zebra");
+
 		Player player = playerService.createPlayer(bean);
 		return player;
 	}

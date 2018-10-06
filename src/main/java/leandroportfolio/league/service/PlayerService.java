@@ -1,6 +1,7 @@
 package leandroportfolio.league.service;
 
 import leandroportfolio.league.dao.PlayerRepository;
+import leandroportfolio.league.handler.exceptions.UserCreationException;
 import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 
@@ -14,6 +15,11 @@ public class PlayerService {
 	PlayerRepository playerRepository;
 	
 	public Player createPlayer(CreatePlayerDto bean) {
+		
+		if(playerRepository.getPlayer(bean.getEmail()) != null) {
+			throw new UserCreationException("User already exists");
+		}
+		
 		Player player = new Player.PlayerBuilder().name(bean.getName())
 											.email(bean.getEmail())
 											.nick(bean.getNick())

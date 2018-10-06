@@ -30,7 +30,10 @@ public class PlayerRepository {
 			.setParameter("email",email)
 			.getResultList();
 		
-		// TODO: verificar se não encontrou ninguém....
+		if(players.isEmpty()) {
+			return null;
+		}
+		
 		return players.get(0);
 	}
 }

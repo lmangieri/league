@@ -2,6 +2,8 @@ package baseArtifact.spring;
 
 import static org.junit.Assert.assertEquals;
 import leandroportfolio.league.dao.PlayerRepository;
+import leandroportfolio.league.handler.ApiError;
+import leandroportfolio.league.handler.Constants;
 import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 
@@ -59,7 +61,7 @@ public class PlayerResourceTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
-	//@Test
+	@Test
 	@DatabaseSetup("/sampleData.xml")
 	public void createPlayerTestBasicFlow() throws Exception {
 		CreatePlayerDto bean = new CreatePlayerDto();
@@ -83,7 +85,7 @@ public class PlayerResourceTest {
 		assertEquals(p1,p2);
 	}
 	
-	//@Test
+	@Test
 	@DatabaseSetup("/sampleData.xml")
 	public void createTwoPlayersWithSameEmail() throws Exception {
 		CreatePlayerDto bean = new CreatePlayerDto();
@@ -98,7 +100,7 @@ public class PlayerResourceTest {
 				))
 				.andExpect(status().isOk())
 				.andReturn();
-		/*
+		
 	    mvcResult = mockMvc.
 				perform(post("/player")
 						.contentType(MediaType.APPLICATION_JSON)
@@ -106,13 +108,10 @@ public class PlayerResourceTest {
 				))
 				.andExpect(status().isBadRequest())
                 .andReturn();
-        */
-		
+	    MockHttpServletResponse response = mvcResult.getResponse();
+	    ApiError err = objMapper.readValue(response.getContentAsString(),ApiError.class);
+		assertEquals(err.getErrorCode(), Constants.UserExceptionConstant);
+		assertEquals(err.getMessage(), "User already exists");
 	}
 	
-	@Test
-	public void test0(){
-		System.out.println("z");
-	}
-		
 }
