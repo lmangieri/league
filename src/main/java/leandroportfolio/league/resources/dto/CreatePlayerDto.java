@@ -5,6 +5,12 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 public class CreatePlayerDto implements Serializable{
+	@Override
+	public String toString() {
+		return "CreatePlayerDto [name=" + name + ", email=" + email + ", nick="
+				+ nick + "]";
+	}
+
 	public CreatePlayerDto() {
 	}
 	

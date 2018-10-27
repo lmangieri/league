@@ -25,7 +25,7 @@ public class PlayerResource {
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes="application/json")
 	public Player createPlayer(@RequestBody CreatePlayerDto bean) {
-
+		System.out.println("createPlayer resource "+bean.toString());
 		Player player = playerService.createPlayer(bean);
 		return player;
 	}

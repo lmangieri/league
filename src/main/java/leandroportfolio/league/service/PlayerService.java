@@ -17,6 +17,7 @@ public class PlayerService {
 	public Player createPlayer(CreatePlayerDto bean) {
 		
 		if(playerRepository.getPlayer(bean.getEmail()) != null) {
+			System.out.println("Exception user creation - user already exists -"+bean.getEmail());
 			throw new UserCreationException("User already exists");
 		}
 		
