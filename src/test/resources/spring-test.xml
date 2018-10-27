@@ -24,7 +24,7 @@
 	
 	<context:property-placeholder properties-ref="properties" />
 
-	
+	<context:component-scan base-package="lleandroportfolio.league.configuration" />
 	<!-- ================================================================================ 
 		Application ================================================================================ -->
 	<context:component-scan base-package="leandroportfolio.league.resources" />

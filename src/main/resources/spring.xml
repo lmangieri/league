@@ -25,6 +25,8 @@
 	</bean>
 	
 	<context:property-placeholder properties-ref="properties" />
+	
+	<context:component-scan base-package="lleandroportfolio.league.configuration" />
 
 	<!--
 	================================================================================
