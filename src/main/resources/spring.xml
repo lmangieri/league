@@ -30,7 +30,6 @@
 	<context:component-scan base-package="leandroportfolio.league.dao" />
 	<context:component-scan base-package="leandroportfolio.league.service" />
 	<context:component-scan base-package="leandroportfolio.league.handler" />
-	<context:component-scan base-package="eandroportfolio.league.cors" />
 
 
 	<!-- ================================================================================ 
