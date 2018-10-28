@@ -17,6 +17,7 @@ public class FilterTest extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		System.out.println("FilterTest was called...");
 	    response.addHeader("Access-Control-Allow-Origin", "*");
 	    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 	    response.setHeader("Access-Control-Allow-Credentials", "true");
