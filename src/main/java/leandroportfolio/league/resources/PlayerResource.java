@@ -13,6 +13,7 @@ import leandroportfolio.league.dao.PlayerRepository;
 import leandroportfolio.league.handler.exceptions.UserCreationException;
 import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
+import leandroportfolio.league.resources.dto.PlayerRepresentation;
 import leandroportfolio.league.service.PlayerService;
 
 @Controller
@@ -24,10 +25,13 @@ public class PlayerResource {
 	
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes="application/json")
-	public Player createPlayer(@RequestBody CreatePlayerDto bean) {
+	public PlayerRepresentation createPlayer(@RequestBody CreatePlayerDto bean) {
 		System.out.println("createPlayer resource "+bean.toString());
 		Player player = playerService.createPlayer(bean);
-		return player;
+		PlayerRepresentation playerRepresentation = new PlayerRepresentation(player);
+
+		
+		return playerRepresentation;
 	}
 	
 }
