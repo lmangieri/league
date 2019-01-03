@@ -1,0 +1,31 @@
+<form [formGroup]="userForm">
+  <!-- 
+  Value: {{ userForm.value | json }}
+  Value userFormError: {{ userFormError | json }}
+  -->
+  <hr>
+  <mat-form-field>
+    <input matInput placeholder="name" formControlName="name">
+  </mat-form-field>
+<br>
+  <mat-form-field>
+    <input matInput placeholder="nick" formControlName="nick">
+  </mat-form-field>
+<br>
+  <mat-form-field>
+    <input matInput placeholder="email" formControlName="email">
+      <mat-error *ngIf="email.invalid && email.touched">
+        Your email doesn't seem correct
+      </mat-error>
+  </mat-form-field>
+<br>
+<br>
+<button mat-raised-button [disabled]="userForm.invalid" (click)="register()" >
+<b>Register </b>
+</button>
+<div *ngIf="userFormError.message">
+   <mat-error>
+      {{ userFormError.message }} 
+    </mat-error>
+  </div>
+</form>
