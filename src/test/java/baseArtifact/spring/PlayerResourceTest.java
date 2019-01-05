@@ -167,8 +167,18 @@ public class PlayerResourceTest {
 						get("/player/isValidNick/Webb"))
 				.andExpect(status().isOk()).andReturn();
 		MockHttpServletResponse response = mvcResult.getResponse();
-		System.out.println(response.getContentAsString());
-
+		boolean b = Boolean.parseBoolean(response.getContentAsString());
+		assertEquals(b,true);
+		
+		mvcResult = mockMvc
+				.perform(
+						get("/player/isValidNick/inexistent"))
+				.andExpect(status().isOk()).andReturn();
+		
+		response = mvcResult.getResponse();
+		
+		b = Boolean.parseBoolean(response.getContentAsString());
+		assertEquals(b,false);
 	}
 
 }
