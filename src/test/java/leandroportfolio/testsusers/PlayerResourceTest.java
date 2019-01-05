@@ -1,4 +1,4 @@
-package baseArtifact.spring;
+package leandroportfolio.testsusers;
 
 import static org.junit.Assert.assertEquals;
 import leandroportfolio.league.dao.PlayerRepository;
@@ -8,11 +8,9 @@ import leandroportfolio.league.model.Player;
 import leandroportfolio.league.resources.dto.CreatePlayerDto;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;

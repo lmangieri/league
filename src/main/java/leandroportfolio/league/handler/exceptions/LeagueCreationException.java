@@ -1,8 +1,8 @@
 package leandroportfolio.league.handler.exceptions;
 
-public class UserCreationException extends RuntimeException {
+public class LeagueCreationException extends RuntimeException{
 
-	public UserCreationException(String message) {
+	public LeagueCreationException(String message) {
 		this.message = message;
 	}
 	private static final long serialVersionUID = 1L;
