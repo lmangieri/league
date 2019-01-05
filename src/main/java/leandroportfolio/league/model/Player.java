@@ -64,7 +64,8 @@ public class Player {
 	public boolean equals(Object that) {
 		Player other = (Player)that;
 		System.out.println("equals result : "+this.email.equals(other.getEmail())) ;
-		return this.email.equals(other.getEmail());
+		boolean eq = (this.email.equals(other.getEmail()) && this.nick.equals(other.getNick()));
+		return eq;
 	}
 	
 	public static class PlayerBuilder {

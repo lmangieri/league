@@ -25,6 +25,31 @@ public class PlayerRepository {
     	return player;
     }
 	
+	public Player getPlayerByNick(String nick) {
+		List<Player> players = em.createQuery("select p from Player p where p.nick = :nick",Player.class)
+				.setParameter("nick",nick)
+				.getResultList();
+			
+			if(players.isEmpty()) {
+				return null;
+			}
+			
+			return players.get(0);
+	}
+	
+	public Player getPlayerByNickAndEmail(final String email, final String nick) {
+		List<Player> players = em.createQuery("select p from Player p where p.email = :email or p.nick = :nick",Player.class)
+			.setParameter("email",email)
+			.setParameter("nick",nick)
+			.getResultList();
+		
+		if(players.isEmpty()) {
+			return null;
+		}
+		
+		return players.get(0);
+	}
+	
 	public Player getPlayer(final String email) {
 		List<Player> players = em.createQuery("select p from Player p where p.email = :email",Player.class)
 			.setParameter("email",email)

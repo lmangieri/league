@@ -13,10 +13,11 @@ public class PlayerService {
 
 	@Autowired
 	PlayerRepository playerRepository;
+
 	
 	public Player createPlayer(CreatePlayerDto bean) {
 		
-		if(playerRepository.getPlayer(bean.getEmail()) != null) {
+		if(playerRepository.getPlayerByNickAndEmail(bean.getEmail(),bean.getNick()) != null) {
 			System.out.println("Exception user creation - user already exists -"+bean.getEmail());
 			throw new UserCreationException("User already exists");
 		}
@@ -28,6 +29,14 @@ public class PlayerService {
 		
 		player = playerRepository.createPlayer(player);
 		return player;
+	}
+	
+	public boolean isValidNick(final String nick) {
+		Player player = playerRepository.getPlayerByNick(nick);
+		if(player == null) {
+			return false;
+		}
+		return true;
 	}
 	
 }

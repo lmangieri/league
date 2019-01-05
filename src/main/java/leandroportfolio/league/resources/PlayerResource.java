@@ -29,9 +29,13 @@ public class PlayerResource {
 		System.out.println("createPlayer resource "+bean.toString());
 		Player player = playerService.createPlayer(bean);
 		PlayerRepresentation playerRepresentation = new PlayerRepresentation(player);
-
-		
 		return playerRepresentation;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/isValidNick/{nick}", method = RequestMethod.GET)
+	public boolean isValidNick(@PathVariable("nick") String nick) {
+		return playerService.isValidNick(nick);
 	}
 	
 }
