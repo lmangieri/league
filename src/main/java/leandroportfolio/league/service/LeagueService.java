@@ -35,17 +35,17 @@ public class LeagueService {
 	public List<LeagueType> getLeagueTypes() {
 		List<LeagueType> list = new ArrayList<LeagueType>();
 		
-		LeagueType type1 = new LeagueType("Random",0L);
+		LeagueType type0 = new LeagueType("Random",0L);
+		list.add(type0);
+		
+		LeagueType type1 = new LeagueType("Keep Double Game",1L);
 		list.add(type1);
 		
-		LeagueType type2 = new LeagueType("Keep Double Game",1L);
+		LeagueType type2 = new LeagueType("Equally Distributed",2L);
 		list.add(type2);
 		
-		LeagueType type3 = new LeagueType("Equally Distributed",2L);
+		LeagueType type3 = new LeagueType("Someone plays all",3L);
 		list.add(type3);
-		
-		LeagueType type4 = new LeagueType("Someone plays all",3L);
-		list.add(type4);
 		
 	   /*
 		* 	LeagueType type5 = new LeagueType("Higher winrate lays first",4L);
@@ -88,8 +88,6 @@ public class LeagueService {
 		} else if(2 == bean.leagueTypeId){
 			leagueaux = new EquallyDistributedLeague(bean.nicks, league.getLeagueid());
 		} else if(3 == bean.leagueTypeId){
-			leagueaux = new RandomLeague(bean.nicks, league.getLeagueid());
-		} else if(4 == bean.leagueTypeId){
 			leagueaux = new SomeonePlaysAllLeague(bean.nicks, league.getLeagueid());
 		 }else {
 			throw new LeagueCreationException(ConstantsMessageError.INVALID_LEAGUE_TYPE + " => "+bean.leagueTypeId);
