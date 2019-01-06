@@ -20,7 +20,7 @@ public class League {
 	@GeneratedValue
 	private long leagueid;
 	
-	@Column(name="LEAGUETYPEID")
+	@Column(name="LEAGUETYPE")
 	private int leagueTypeId;
 	
 	@Column(name="CREATEDDATE")

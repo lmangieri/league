@@ -157,4 +157,5 @@ public class LeagueResourceTest {
 		
 		assertEquals(err.getMessage().contains(ConstantsMessageError.INVALID_LEAGUE_TYPE),true);
 	}
+	
 }
