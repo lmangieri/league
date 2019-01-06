@@ -20,7 +20,7 @@ public class KeepDoubleGameLeague extends CommonLeague {
 
 		int order = 0;
 		
-		Dupla dupla = duplasList.remove(0);
+		Dupla dupla = duplasList.get(0);
 		Round round = new Round.RoundBuilder().leagueid(this.leagueid).nick1(dupla.nick1)
 											.nick2(dupla.nick2).order(order).build();
 		
@@ -30,9 +30,11 @@ public class KeepDoubleGameLeague extends CommonLeague {
 		usedNickTimes.replace(dupla.nick2, usedNickTimes.get(dupla.nick2) + 1);
 		order = order + 1;
 		
+		this.duplasList.remove(dupla);
+		
 		// identificar quem da ultima dupla tem o menor numero de jogos
 		String nickWithLessGamesFromDupla = getNickWithLessGamesFromDupla(dupla);
-		
+
 		
 		while(duplasList.size() > 0) {
 			dupla = identifyNextDupla(nickWithLessGamesFromDupla);
