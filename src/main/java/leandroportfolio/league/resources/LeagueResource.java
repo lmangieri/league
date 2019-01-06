@@ -31,9 +31,20 @@ public class LeagueResource {
 		return leagueTypeRepresentation;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/ranking", method = RequestMethod.GET)
+	public RankingRepresentation getRanking() {
+		return leagueService.getRanking();
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST , consumes="application/json")
 	public LeagueRepresentation createLeague(@RequestBody CreateLeagueDTO bean) {
 		return leagueService.createLeague(bean);
 	}
+	
+	
+	
 }

@@ -19,6 +19,8 @@ import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.model.Round;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
+import leandroportfolio.league.resources.dto.PlayerScoreInfo;
+import leandroportfolio.league.resources.dto.RankingRepresentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,15 @@ public class LeagueService {
 	
 	@Autowired
 	LeagueRepository leagueRepository;
+	
+	
+	public RankingRepresentation getRanking() {
+		
+		List<PlayerScoreInfo> listPlayerScoreInfo = leagueRepository.getListPlayerScoreInfo();
+		
+		RankingRepresentation rankingRepresentation = new RankingRepresentation(listPlayerScoreInfo);
+		return rankingRepresentation;
+	}
 
 	public List<LeagueType> getLeagueTypes() {
 		List<LeagueType> list = new ArrayList<LeagueType>();
