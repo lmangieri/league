@@ -14,5 +14,5 @@ public class CreateLeagueDTO implements Serializable{
 	}
 	
 	public List<String> nicks;
-	public Long leagueTypeId;
+	public int leagueTypeId;
 }

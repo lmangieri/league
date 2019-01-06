@@ -5,11 +5,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import leandroportfolio.league.dao.LeagueRepository;
 import leandroportfolio.league.dao.PlayerRepository;
 import leandroportfolio.league.handler.exceptions.ConstantsMessageError;
 import leandroportfolio.league.handler.exceptions.LeagueCreationException;
+import leandroportfolio.league.leaguetypes.CommonLeague;
+import leandroportfolio.league.leaguetypes.EquallyDistributedLeague;
+import leandroportfolio.league.leaguetypes.KeepDoubleGameLeague;
+import leandroportfolio.league.leaguetypes.RandomLeague;
+import leandroportfolio.league.leaguetypes.SomeonePlaysAllLeague;
+import leandroportfolio.league.model.League;
 import leandroportfolio.league.model.LeagueType;
+import leandroportfolio.league.model.Round;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
+import leandroportfolio.league.resources.dto.LeagueRepresentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +28,9 @@ public class LeagueService {
 	
 	@Autowired 
 	PlayerService playerService;
+	
+	@Autowired
+	LeagueRepository leagueRepository;
 
 	public List<LeagueType> getLeagueTypes() {
 		List<LeagueType> list = new ArrayList<LeagueType>();
@@ -43,7 +55,8 @@ public class LeagueService {
 		return list;
 	}
 
-	public void createLeague(CreateLeagueDTO bean) {
+	//TODO: TUDO o que está aqui.... precisa estar em uma transaction....
+	public LeagueRepresentation createLeague(CreateLeagueDTO bean) {
 		Set<String> set = new TreeSet<String>();
 		set.addAll(bean.nicks);
 		if(set.size() != bean.nicks.size()) {
@@ -60,39 +73,34 @@ public class LeagueService {
 			}
 		}
 		
-		Long leagueId;
+		League league = new League.LeagueBuilder().leagueTypeId(bean.leagueTypeId).build();
 		
-		if(0L == bean.leagueTypeId){
-			System.out.println("leaguetype is 0L");
-			leagueId = createRandomLeague(bean.nicks);
-		} else if(1L == bean.leagueTypeId){
-			System.out.println("");
-			leagueId = createKeepDoubleGameLeague(bean.nicks);
-		} else if(2L == bean.leagueTypeId){
-			System.out.println("");
-			leagueId = createEquallyDistributedLeague(bean.nicks);
-		} else if(3L == bean.leagueTypeId){
-			System.out.println("");
-			leagueId = createSomeonePlaysAllLeague(bean.nicks);
-		} else {
+		leagueRepository.createLeague(league);
+		/*create league here on db....*/
+		
+		List<Round> roundList = new ArrayList<Round>();
+		CommonLeague leagueaux;
+		
+		if(0 == bean.leagueTypeId){
+			leagueaux = new RandomLeague(bean.nicks, league.getLeagueid());
+		} else if(1 == bean.leagueTypeId){
+			leagueaux = new KeepDoubleGameLeague(bean.nicks, league.getLeagueid());
+		} else if(2 == bean.leagueTypeId){
+			leagueaux = new EquallyDistributedLeague(bean.nicks, league.getLeagueid());
+		} else if(3 == bean.leagueTypeId){
+			leagueaux = new RandomLeague(bean.nicks, league.getLeagueid());
+		} else if(4 == bean.leagueTypeId){
+			leagueaux = new SomeonePlaysAllLeague(bean.nicks, league.getLeagueid());
+		 }else {
 			throw new LeagueCreationException(ConstantsMessageError.INVALID_LEAGUE_TYPE + " => "+bean.leagueTypeId);
 		}
-	}
-	
-	
-	private Long createRandomLeague (List<String> nicks){
-		return null;
-	}
-	
-	private Long createKeepDoubleGameLeague (List<String> nicks){
-		return null;
-	}
-	
-	private Long createEquallyDistributedLeague (List<String> nicks){
-		return null;
-	}
-	
-	private Long createSomeonePlaysAllLeague (List<String> nicks){
-		return null;
+		
+		roundList.addAll(leagueaux.createRoundList());
+		for(Round round : roundList) {
+			leagueRepository.createRound(round);
+		}
+		
+		LeagueRepresentation leagueRepresentation = new LeagueRepresentation(league.getLeagueid(),roundList);
+		return leagueRepresentation;
 	}
 }

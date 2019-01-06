@@ -67,7 +67,7 @@ public class LeagueResourceTest {
 	public void testListOfNicksMustBeUniqueCreateLeague() throws Exception {
 		CreateLeagueDTO createLeagueDTO = new CreateLeagueDTO();
 
-		createLeagueDTO.leagueTypeId = 0l;
+		createLeagueDTO.leagueTypeId = 0;
 		createLeagueDTO.nicks = new ArrayList<String>();
 		createLeagueDTO.nicks.add("coke kills");
 		createLeagueDTO.nicks.add("coke kills");
@@ -92,7 +92,7 @@ public class LeagueResourceTest {
 	public void numberOfNicksMustBeHigherThan0() throws Exception {
 		CreateLeagueDTO createLeagueDTO = new CreateLeagueDTO();
 
-		createLeagueDTO.leagueTypeId = 0l;
+		createLeagueDTO.leagueTypeId = 0;
 		createLeagueDTO.nicks = new ArrayList<String>();
 		
 		ObjectMapper objMapper = new ObjectMapper();
@@ -113,7 +113,7 @@ public class LeagueResourceTest {
 	public void invalidNickOnCreateLeague() throws Exception {
 		CreateLeagueDTO createLeagueDTO = new CreateLeagueDTO();
 
-		createLeagueDTO.leagueTypeId = 0l;
+		createLeagueDTO.leagueTypeId = 0;
 		createLeagueDTO.nicks = new ArrayList<String>();
 		createLeagueDTO.nicks.add("InexistentNick1");
 		createLeagueDTO.nicks.add("InexistentNick2");
@@ -137,7 +137,7 @@ public class LeagueResourceTest {
 	public void invalidLeagueType() throws Exception {
 		CreateLeagueDTO createLeagueDTO = new CreateLeagueDTO();
 
-		createLeagueDTO.leagueTypeId = 20l;
+		createLeagueDTO.leagueTypeId = 20;
 		createLeagueDTO.nicks = new ArrayList<String>();
 		createLeagueDTO.nicks.add("alf0");
 		createLeagueDTO.nicks.add("alf1");

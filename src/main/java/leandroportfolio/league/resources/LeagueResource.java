@@ -4,6 +4,7 @@ import java.util.List;
 
 import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
+import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.LeagueTypeRepresentation;
 import leandroportfolio.league.service.LeagueService;
 
@@ -32,9 +33,7 @@ public class LeagueResource {
 	
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST , consumes="application/json")
-	public boolean createLeague(@RequestBody CreateLeagueDTO bean) {
-		leagueService.createLeague(bean);
-	// TODO: actually, here will return a complicated one.
-		return true;
+	public LeagueRepresentation createLeague(@RequestBody CreateLeagueDTO bean) {
+		return leagueService.createLeague(bean);
 	}
 }

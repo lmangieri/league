@@ -57,7 +57,7 @@ public class Player {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.email);
+		return Objects.hash(this.nick);
 	}
 	
 	@Override

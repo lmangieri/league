@@ -10,6 +10,8 @@
 
    <!-- entidade mapeada -->
    <class>leandroportfolio.league.model.Player</class>
+   <class>leandroportfolio.league.model.League</class>
+   <class>leandroportfolio.league.model.Round</class>
 
    <properties>
      <property name="hibernate.dialect" 

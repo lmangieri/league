@@ -21,7 +21,7 @@ public class League {
 	private long leagueid;
 	
 	@Column(name="LEAGUETYPEID")
-	private long leagueTypeId;
+	private int leagueTypeId;
 	
 	@Column(name="CREATEDDATE")
 	private long createdDate;
@@ -33,15 +33,45 @@ public class League {
 	private boolean isClosed;
 	
 	public static class LeagueBuilder {
-		private long leagueTypeId;
+		private int leagueTypeId;
 		
-		public LeagueBuilder leagueTypeId(final Long leagueTypeId) {
+		public LeagueBuilder leagueTypeId(final int leagueTypeId) {
 			this.leagueTypeId = leagueTypeId;
 			return this;
 		}
 		
-		public League Build() {
+		public League build() {
 			return new League(this);
 		}
 	}
+
+	public long getLeagueid() {
+		return leagueid;
+	}
+
+	public int getLeagueTypeId() {
+		return leagueTypeId;
+	}
+
+	public long getCreatedDate() {
+		return createdDate;
+	}
+
+	public long getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(long endDate) {
+		this.endDate = endDate;
+	}
+
+	public boolean isClosed() {
+		return isClosed;
+	}
+
+	public void setClosed(boolean isClosed) {
+		this.isClosed = isClosed;
+	}
+	
+	
 }
