@@ -6,6 +6,7 @@ import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.LeagueTypeRepresentation;
+import leandroportfolio.league.resources.dto.RankingRepresentation;
 import leandroportfolio.league.service.LeagueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
