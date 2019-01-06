@@ -34,10 +34,18 @@ public class LeagueRepository {
 			String email = (String)objects[2];
 			String createddate = (String)objects[3].toString();
 			
-			
-			String totalVictory = objects[4].toString();
-			String totalGames = objects[5].toString();
-
+			String totalVictory;
+			if(objects[4] == null) {
+				totalVictory = "0";
+			} else {
+				totalVictory = objects[4].toString();
+			}
+			String totalGames;
+			if(objects[5] == null) {
+				totalGames ="0";
+			} else {
+				totalGames = objects[5].toString();
+			}
 			PlayerScoreInfo playerScoreInfo = new PlayerScoreInfo(name,nick,email,createddate,totalVictory,totalGames);
 			listPlayerScoreInfo.add(playerScoreInfo);
 		}
