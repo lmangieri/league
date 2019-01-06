@@ -21,7 +21,7 @@ public class LeagueRepository {
 	
 	public List<PlayerScoreInfo> getListPlayerScoreInfo() {
 		
-		List<PlayerScoreInfo> playerScoreInfoList = em.createQuery("select new PlayerScoreInfo(P.NAME,P.NICK,P.EMAIL,P.CREATEDDATE, "
+		List<PlayerScoreInfo> playerScoreInfoList = em.createQuery("select new leandroportfolio.league.resources.dto.PlayerScoreInfo(P.NAME,P.NICK,P.EMAIL,P.CREATEDDATE, "
 				+ "consolidatedround.victoryTotal, consolidatedround.totalGames)  from PLAYER P left join (select roundcon.nick nick, sum(roundcon.victoryTotal) as victoryTotal, sum(roundcon.totalGames) totalGames from "
 				+"(select nick1 as nick, sum(score1) as victoryTotal, (sum(score1) + sum(score2)) as totalGames from ROUND group by nick1 "
 				+" union all "
