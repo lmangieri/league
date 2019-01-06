@@ -1,5 +1,7 @@
 package leandroportfolio.league.dao;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,15 +22,27 @@ public class LeagueRepository {
 	private EntityManager em;
 	
 	public List<PlayerScoreInfo> getListPlayerScoreInfo() {
+		List<PlayerScoreInfo> listPlayerScoreInfo = new ArrayList<PlayerScoreInfo>();
 		
-		List<PlayerScoreInfo> playerScoreInfoList = em.createQuery("select new leandroportfolio.league.resources.dto.PlayerScoreInfo(P.NAME,P.NICK,P.EMAIL,P.CREATEDDATE, "
-				+ "consolidatedround.victoryTotal, consolidatedround.totalGames)  from PLAYER P left join (select roundcon.nick nick, sum(roundcon.victoryTotal) as victoryTotal, sum(roundcon.totalGames) totalGames from "
-				+"(select nick1 as nick, sum(score1) as victoryTotal, (sum(score1) + sum(score2)) as totalGames from ROUND group by nick1 "
-				+" union all "
-				+"select nick2 as nick, sum(score2) as victoryTotal, (sum(score1) + sum(score2)) as totalGames from ROUND group by nick2) roundcon group by nick) consolidatedround on P.NICK = consolidatedround.NICK",PlayerScoreInfo.class)
-				.getResultList();
+	    List<Object[]> list = em.createNativeQuery("select P.NAME,P.NICK,P.EMAIL,P.CREATEDDATE, consolidatedround.victoryTotal, consolidatedround.totalGames  from PLAYER P left join (select roundcon.nick nick, sum(roundcon.victoryTotal) as victoryTotal, sum(roundcon.totalGames) totalGames from "
+				+ "(select nick1 as nick, sum(score1) as victoryTotal, (sum(score1) + sum(score2)) as totalGames from ROUND group by nick1  union all select nick2 as nick, sum(score2) as victoryTotal, (sum(score1) + sum(score2)) as totalGames from ROUND group by nick2) roundcon group by nick) consolidatedround "
+				+ "on P.NICK = consolidatedround.NICK").getResultList();
 		
-		return playerScoreInfoList;
+		for(Object[] objects : list) {
+			String name = (String)objects[0];
+			String nick = (String)objects[1];
+			String email = (String)objects[2];
+			java.math.BigInteger bigInteger = (java.math.BigInteger)objects[3];
+			
+			long createddate = bigInteger.longValue();
+			
+			String totalVictory = objects[4].toString();
+			String totalGames = objects[5].toString();
+
+			PlayerScoreInfo playerScoreInfo = new PlayerScoreInfo(name,nick,email,createddate,totalVictory,totalGames);
+			listPlayerScoreInfo.add(playerScoreInfo);
+		}
+		return listPlayerScoreInfo;
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED)

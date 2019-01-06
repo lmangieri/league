@@ -158,4 +158,10 @@ public class LeagueResourceTest {
 		assertEquals(err.getMessage().contains(ConstantsMessageError.INVALID_LEAGUE_TYPE),true);
 	}
 	
+	@Test
+	@DatabaseSetup("/dataLeagueTests.xml")
+	public void testLeagueRaking() throws Exception {
+		mockMvc.perform(get("/league/ranking")).andExpect(status().isOk()).andReturn();
+	}
+	
 }
