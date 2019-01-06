@@ -57,7 +57,7 @@ public class KeepDoubleGameLeague extends CommonLeague {
 	private Dupla identifyNextDupla(String participant) {
 		
 		Dupla nextDupla = duplasList.get(0);
-		int total = this.usedNickTimes.get(identifySecondOfDupla(nextDupla,participant));
+		int total = 100000;
 		
 		int aux;
 		
