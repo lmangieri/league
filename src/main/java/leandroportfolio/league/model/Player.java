@@ -11,6 +11,7 @@ public class Player {
 		this.name = builder.name;
 		this.nick = builder.nick;
 		this.email = builder.email;
+		this.createddate = System.currentTimeMillis();
 	}
 	
 	public Player() {
@@ -26,6 +27,9 @@ public class Player {
 	
 	@Column(name="NICK")
 	private String nick;
+	
+	@Column(name="CREATEDDATE")
+	private long createddate;
 	
 	@Column(name="EMAIL",unique=true)
 	private String email;
@@ -53,6 +57,10 @@ public class Player {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public long getCreateddate() {
+		return this.createddate;
 	}
 	
 	@Override
