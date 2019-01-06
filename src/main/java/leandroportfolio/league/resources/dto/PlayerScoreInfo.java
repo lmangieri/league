@@ -15,13 +15,13 @@ public class PlayerScoreInfo {
 	
 	public String winrate;
 
-	public PlayerScoreInfo(String name,String nick,String email,long createdDate,String victoryTotal,String totalGames ) {
+	public PlayerScoreInfo(String name,String nick,String email,String createdDate,String victoryTotal,String totalGames ) {
 		this.name = name;
 		this.nick = nick;
 		this.email = email;
 	
 		
-		this.createdDate = Utils.getFormatedDate(createdDate);
+		this.createdDate = Utils.getFormatedDate(Long.parseLong(createdDate));
 		this.totalGames = Integer.parseInt(totalGames);
 		this.totalVictory = Integer.parseInt(victoryTotal);
 		this.totalLost = this.totalGames - this.totalVictory;

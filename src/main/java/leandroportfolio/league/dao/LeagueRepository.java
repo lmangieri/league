@@ -32,9 +32,8 @@ public class LeagueRepository {
 			String name = (String)objects[0];
 			String nick = (String)objects[1];
 			String email = (String)objects[2];
-			java.math.BigInteger bigInteger = (java.math.BigInteger)objects[3];
+			String createddate = (String)objects[3].toString();
 			
-			long createddate = bigInteger.longValue();
 			
 			String totalVictory = objects[4].toString();
 			String totalGames = objects[5].toString();
