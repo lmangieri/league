@@ -72,6 +72,8 @@ public class League {
 	public void setClosed(boolean isClosed) {
 		this.isClosed = isClosed;
 	}
-	
-	
+
+	public void setIsClosed(boolean closeLeague) {
+		this.isClosed = closeLeague;
+	}
 }

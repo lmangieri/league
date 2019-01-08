@@ -1,6 +1,7 @@
 package leandroportfolio.league.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,10 +19,13 @@ import leandroportfolio.league.model.League;
 import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.model.Round;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
+import leandroportfolio.league.resources.dto.LeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.PlayerScoreInfo;
+import leandroportfolio.league.resources.dto.RankingDTO;
 import leandroportfolio.league.resources.dto.RankingRepresentation;
 
+import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -111,5 +115,40 @@ public class LeagueService {
 		
 		LeagueRepresentation leagueRepresentation = new LeagueRepresentation(league.getLeagueid(),roundList);
 		return leagueRepresentation;
+	}
+
+	public boolean updateRound(LeagueDTO bean) {
+		if(bean.leagueid == null) {
+			throw new LeagueCreationException(ConstantsMessageError.INVALID_LEAGUEID);
+		}
+		
+		League league = leagueRepository.getLeague(bean.leagueid);
+		
+		if(league.isClosed()) {
+			throw new LeagueCreationException(ConstantsMessageError.LEAGUE_IS_ALREADY_CLOSED);
+		}
+		List<Round> originalRounds = leagueRepository.getRounds(bean.leagueid);
+		List<Round> beanRounds = bean.listRound;
+		
+		if((originalRounds.size() != beanRounds.size())) {
+			throw new LeagueCreationException(ConstantsMessageError.INVALID_NUMBER_OF_ROUNDS);
+		}
+		Collections.sort(originalRounds);
+		Collections.sort(beanRounds);
+		
+		
+		for(int count = 0; count < originalRounds.size(); count++) {
+			Round roundOrig =  originalRounds.get(count);
+			Round beanRound =  beanRounds.get(count);
+			if(roundOrig.equalsIgnoreScore(beanRound)) {
+				roundOrig.updateScores(beanRound.getScore1(), beanRound.getScore2());
+				leagueRepository.updateRound(roundOrig);
+			} else {
+				throw new LeagueCreationException(ConstantsMessageError.ROUND_IS_DIFFERENT_FROM_ORIGINAL);
+			}
+		}
+		league.setIsClosed(bean.closeLeague);
+		leagueRepository.updateLeague(league);
+		return true;
 	}
 }

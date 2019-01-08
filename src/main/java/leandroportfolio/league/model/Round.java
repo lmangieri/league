@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ROUND")
-public class Round {
+public class Round implements Comparable<Round> {
 
 	public Round() {
 	}
@@ -20,6 +20,11 @@ public class Round {
 		this.score1 = 0;
 		this.score2 = 0;
 		this.order = roundBuilder.order;
+	}
+	
+	public void updateScores(int score1, int score2) {
+		this.score1 = score1;
+		this.score2 = score2;
 	}
 	
 	@Id
@@ -44,6 +49,10 @@ public class Round {
 	@Column(name="ORDERR")
 	private int order;
 	
+	public long getLeagueid() {
+		return this.leagueid;
+	}
+	
 	public String getNick1() {
 		return this.nick1;
 	}
@@ -62,7 +71,15 @@ public class Round {
 	
 	public int getOrder() {
 		return this.order;
-	}	
+	}
+	
+	public boolean equalsIgnoreScore(Object that) {
+		Round other = (Round)that;
+		if(this.nick1.equals(other.getNick1()) && this.nick2.equals(other.getNick2()) && this.leagueid == other.getLeagueid()) {
+			return true;
+		}
+		return false;
+	}
 	
 	public static class RoundBuilder {
 		private long leagueid;
@@ -93,6 +110,17 @@ public class Round {
 			this.order =order;
 			return this;
 		}
+	}
+
+	@Override
+	public int compareTo(Round other) {
+		if(this.getOrder() > other.getOrder()) {
+			return 1;
+		}
+		if(this.getOrder() == other.getOrder()) {
+			return 0;
+		}
+		return -1;
 	}
 	
 }

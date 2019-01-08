@@ -6,6 +6,7 @@ import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.LeagueTypeRepresentation;
+import leandroportfolio.league.resources.dto.RankingDTO;
 import leandroportfolio.league.resources.dto.RankingRepresentation;
 import leandroportfolio.league.service.LeagueService;
 
@@ -37,6 +38,12 @@ public class LeagueResource {
 	@RequestMapping(value = "/ranking", method = RequestMethod.GET)
 	public RankingRepresentation getRanking() {
 		return leagueService.getRanking();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/round", method = RequestMethod.POST , consumes="application/json")
+	public boolean updateRound(@RequestBody RankingDTO bean) {
+		return leagueService.updateRound(bean);
 	}
 	
 	

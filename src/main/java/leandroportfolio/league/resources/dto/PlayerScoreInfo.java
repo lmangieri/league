@@ -25,5 +25,16 @@ public class PlayerScoreInfo {
 		this.totalGames = Integer.parseInt(totalGames);
 		this.totalVictory = Integer.parseInt(victoryTotal);
 		this.totalLost = this.totalGames - this.totalVictory;
+		
+		this.winrate = this.generateWinrate(this.totalVictory, this.totalLost);
+	}
+	
+	private String generateWinrate(int totalVictory,int totalGames) {
+		double d = 0;
+		if(totalGames > 0) {
+			d = totalVictory/totalGames;
+		}
+
+		return Double.toString(d)+"%";
 	}
 }

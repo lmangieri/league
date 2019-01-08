@@ -7,7 +7,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import leandroportfolio.league.handler.exceptions.ConstantsMessageError;
+import leandroportfolio.league.handler.exceptions.LeagueCreationException;
 import leandroportfolio.league.model.League;
+import leandroportfolio.league.model.Player;
 import leandroportfolio.league.model.Round;
 import leandroportfolio.league.resources.dto.PlayerScoreInfo;
 
@@ -62,5 +65,34 @@ public class LeagueRepository {
 	public Round createRound(Round round) {
 		em.persist(round);
 		return round;
+	}
+	
+	public League getLeague(Long leagueid) {
+		League league = em.createQuery("select l from League l where l.leagueid = :leagueid",League.class)
+				.setParameter("leagueid",leagueid)
+				.getSingleResult();
+		
+		if(league == null) {
+			throw new LeagueCreationException(ConstantsMessageError.INVALID_LEAGUEID + " => "+leagueid);
+		}
+		
+		return league;
+	}
+
+	public List<Round> getRounds(Long leagueid) {
+		List<Round> rounds = em.createQuery("select r from Round r where r.leagueid = :leagueid",Round.class)
+				.setParameter("leagueid", leagueid)
+				.getResultList();
+		return rounds;
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateRound(Round roundOrig) {
+		em.merge(roundOrig);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateLeague(League league) {
+		em.merge(league);
 	}
 }
