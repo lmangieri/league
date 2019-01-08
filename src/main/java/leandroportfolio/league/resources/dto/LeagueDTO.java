@@ -1,10 +1,14 @@
 package leandroportfolio.league.resources.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import leandroportfolio.league.model.Round;
 
-public class LeagueDTO {
+public class LeagueDTO implements Serializable{
+	public LeagueDTO() {
+	}
+	
 	public Long leagueid;
 	
 	public List<Round> listRound;
