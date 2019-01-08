@@ -29,7 +29,7 @@ public class PlayerScoreInfo {
 		
 		double d = 0;
 		if(this.totalGames > 0) {
-			d = this.totalVictory/this.totalGames;
+			d = (double)this.totalVictory/((double)this.totalGames);
 		}
 		
 		this.winrate = Double.toString(d)+"%";
