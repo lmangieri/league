@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import leandroportfolio.league.dao.LeagueRepository;
-import leandroportfolio.league.dao.PlayerRepository;
 import leandroportfolio.league.handler.exceptions.ConstantsMessageError;
 import leandroportfolio.league.handler.exceptions.LeagueCreationException;
 import leandroportfolio.league.leaguetypes.CommonLeague;
@@ -22,10 +21,8 @@ import leandroportfolio.league.resources.dto.CreateLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.PlayerScoreInfo;
-import leandroportfolio.league.resources.dto.RankingDTO;
 import leandroportfolio.league.resources.dto.RankingRepresentation;
 
-import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
