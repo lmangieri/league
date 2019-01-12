@@ -1,3 +1,48 @@
-<p>
-  leagueform works! {{ environmentName }}
-</p>
+<form [formGroup]="leagueForm">
+
+<hr>
+
+<mat-form-field>
+  <input matInput placeholder="nick" formControlName="nick">
+</mat-form-field>
+
+<div *ngIf="errorIsValidNick.message">
+    <mat-error>
+       {{ errorIsValidNick.message }} 
+     </mat-error>
+</div>
+
+<hr>
+<button (click)="addNick()">
+Add Nick
+</button>
+
+<hr>
+<table id="league">
+    <tr>
+      <th>Nick</th>
+    </tr>
+    <tr *ngFor="let nick of listNicks">
+        <td>{{ nick }}</td>
+    </tr>
+  
+</table>
+
+<hr>
+<button (click)="cleans()" >Clean</button>
+
+
+<hr>
+<label for="leagueTypeId">League Type</label>
+<select formControlName="leagueTypeId" class="form-control" id="leagueTypeId" required>
+    <option *ngFor="let leagueType of leagueTypeRepresentation.list" [value]="leagueType.leagueTypeId">{{leagueType.name}}</option>
+</select>
+
+<hr>
+<button (click)="createLeague()" >Create League</button>
+
+<div *ngIf="errorCreateLeague.message">
+    <mat-error>
+       {{ errorCreateLeague.message }} 
+     </mat-error>
+</div>

@@ -47,7 +47,7 @@ export class UserformComponent implements OnInit {
         Validators.required,
         Validators.email
       ]],
-      name : 'sasas',
+      name : '',
       nick : ''
     });
     
