@@ -8,6 +8,7 @@ import { UserFormError } from './userform/userform.component';
 import { environment } from 'src/environments/environment';
 import { PlayerScoreInfo, RankingRepresentation } from './ranking/ranking.component';
 import { WebDriverLogger } from 'blocking-proxy/built/lib/webdriver_logger';
+import { CreateLeagueDTO } from './leagueform/leagueform.component';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -41,5 +42,17 @@ export class RestService {
 
    getRanking() {
     return this.http.get<RankingRepresentation>(this.httpBase+'/leagueapp/service/league/ranking');
+  }
+
+  isValidNick(nick : string) {
+    return this.http.get(this.httpBase+'/leagueapp/service/player/isValidNick/'+nick);
+  }
+
+  getLeagueType() {
+    return this.http.get(this.httpBase+'/leagueapp/service/league/leagueTypes');
+  }
+
+  createLeague(createLeagueDTO : CreateLeagueDTO) {
+    return this.http.post<CreateLeagueDTO>(this.httpBase+'/leagueapp/service/league',createLeagueDTO, httpOptions);
   }
 }
