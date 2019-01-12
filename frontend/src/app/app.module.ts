@@ -14,14 +14,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LeagueformComponent } from './leagueform/leagueform.component';
-import { HttpClientModule } from '@angular/common/http';  
+import { HttpClientModule } from '@angular/common/http';
+import { RankingComponent } from './ranking/ranking.component';  
 
 @NgModule({
   declarations: [
     AppComponent,
     UserformComponent,
     SidebarComponent,
-    LeagueformComponent
+    LeagueformComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,

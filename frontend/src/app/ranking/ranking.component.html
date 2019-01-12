@@ -1,0 +1,24 @@
+<table id="ranking">
+  <tr>
+    <th>Name</th>
+    <th>Nick</th>
+    <th>E-mail</th>
+    <th>Created Date</th>
+    <th>Total Games</th>
+    <th>Total Victory</th>
+    <th>Total Lost</th>
+    <th>Winrate</th>
+  </tr>
+  <tr *ngFor="let player of rankingRepresentation.list">
+      <td>{{ player.name }}</td>
+      <td>{{ player.email }}</td>
+      <td>{{ player.nick }}</td>
+      <td>{{ player.createdDate }}</td>
+      <td>{{ player.totalGames }}</td>
+      <td>{{ player.totalVictory }}</td>
+      <td>{{ player.totalLost }}</td>
+      <td>{{ player.winrate }}</td>
+  </tr>
+
+</table>
+

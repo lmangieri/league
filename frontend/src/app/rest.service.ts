@@ -6,6 +6,8 @@ import { UserformComponent } from './userform/userform.component';
 import { User } from './userform/userform.component';
 import { UserFormError } from './userform/userform.component';
 import { environment } from 'src/environments/environment';
+import { PlayerScoreInfo, RankingRepresentation } from './ranking/ranking.component';
+import { WebDriverLogger } from 'blocking-proxy/built/lib/webdriver_logger';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,6 +36,10 @@ export class RestService {
         userFormError.assign(userFormError2);
       }
     );
-    return 1;
+    return null;
+  }
+
+   getRanking() {
+    return this.http.get<RankingRepresentation>(this.httpBase+'/leagueapp/service/league/ranking');
   }
 }
