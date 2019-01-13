@@ -68,15 +68,15 @@ public class LeagueRepository {
 	}
 	
 	public League getLeague(Long leagueid) {
-		League league = em.createQuery("select l from League l where l.leagueid = :leagueid",League.class)
+		List<League> list = em.createQuery("select l from League l where l.leagueid = :leagueid",League.class)
 				.setParameter("leagueid",leagueid)
-				.getSingleResult();
+				.getResultList();
 		
-		if(league == null) {
+		if(list.isEmpty()) {
 			throw new LeagueCreationException(ConstantsMessageError.INVALID_LEAGUEID + " => "+leagueid);
 		}
 		
-		return league;
+		return list.get(0);
 	}
 
 	public List<Round> getRounds(Long leagueid) {
