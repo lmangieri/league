@@ -97,14 +97,7 @@ public class LeagueRepository {
 	}
 
 	public Long getLatestLeagueId() {
-		Long l = 0L;
-		Integer aux;
-		List<Object[]> list = em.createNativeQuery("select max(leagueid) from LEAGUE").getResultList();
-		for(Object[] objects : list) {
-			aux = (Integer) objects[0];
-			l = aux.longValue();
-			break;
-		}
-		return l;
+		Integer maxAdvId = (Integer) em.createNativeQuery("select max(leagueid) from LEAGUE").getSingleResult();
+		return maxAdvId.longValue();
 	}
 }
