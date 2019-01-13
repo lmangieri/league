@@ -64,7 +64,7 @@ public class LeagueResource {
 		
 		Long l = null;
 		try {
-			if(leagueId != null) {
+			if(leagueId != null || !leagueId.isEmpty()) {
 				l = Long.parseLong(leagueId);
 			}
 		} catch (NumberFormatException e) {
