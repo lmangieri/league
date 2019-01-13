@@ -13,6 +13,7 @@ import leandroportfolio.league.service.LeagueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,9 +56,9 @@ public class LeagueResource {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "", method = RequestMethod.GET ,consumes="application/json")
-	public LeagueRepresentation getLeague(@RequestBody GetLeagueDTO bean) {
-		return leagueService.getLeague(bean);
+	@RequestMapping(value = "/{leagueId}", method = RequestMethod.GET )
+	public LeagueRepresentation getLeague(@PathVariable("leagueId") Long leagueId) {
+		return leagueService.getLeague(leagueId);
 	}
 	
 }

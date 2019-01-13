@@ -150,15 +150,12 @@ public class LeagueService {
 		return true;
 	}
 
-	public LeagueRepresentation getLeague(GetLeagueDTO bean) {
-		Long leagueid = -1L;
-		if(bean.leagueid == null || bean.leagueid.equals(-1L)) {
+	public LeagueRepresentation getLeague(Long leagueid) {
+		if(leagueid == null || leagueid.equals(-1L)) {
 			leagueid = leagueRepository.getLatestLeagueId();
-		} else {
-			leagueid = bean.leagueid;
 		}
-		League league = leagueRepository.getLeague(bean.leagueid);
-		List<Round> originalRounds = leagueRepository.getRounds(bean.leagueid);
+		League league = leagueRepository.getLeague(leagueid);
+		List<Round> originalRounds = leagueRepository.getRounds(leagueid);
 		Collections.sort(originalRounds);
 		
 		LeagueRepresentation leagueRepresentation = new LeagueRepresentation(league.getLeagueid(),originalRounds);
