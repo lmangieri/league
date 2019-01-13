@@ -60,18 +60,8 @@ public class LeagueResource {
 	
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.GET )
-	public LeagueRepresentation getLeague(@RequestParam("leagueId") String leagueId) {
-		
-		Long l = null;
-		try {
-			if(leagueId != null || !leagueId.isEmpty()) {
-				l = Long.parseLong(leagueId);
-			}
-		} catch (NumberFormatException e) {
-			throw new LeagueCreationException(ConstantsMessageError.INVALID_LONG);
-		}
-		
-		return leagueService.getLeague(l);
+	public LeagueRepresentation getLeague(@RequestParam(value = "leagueId", required=false) Long leagueId) {
+		return leagueService.getLeague(leagueId);
 	}
 	
 }
