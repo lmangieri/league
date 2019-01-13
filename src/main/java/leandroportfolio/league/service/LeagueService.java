@@ -18,6 +18,7 @@ import leandroportfolio.league.model.League;
 import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.model.Round;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
+import leandroportfolio.league.resources.dto.GetLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.PlayerScoreInfo;
@@ -147,5 +148,20 @@ public class LeagueService {
 		league.setIsClosed(bean.closeLeague);
 		leagueRepository.updateLeague(league);
 		return true;
+	}
+
+	public LeagueRepresentation getLeague(GetLeagueDTO bean) {
+		Long leagueid = -1L;
+		if(bean.leagueid == null || bean.leagueid.equals(-1L)) {
+			leagueid = leagueRepository.getLatestLeagueId();
+		} else {
+			leagueid = bean.leagueid;
+		}
+		League league = leagueRepository.getLeague(bean.leagueid);
+		List<Round> originalRounds = leagueRepository.getRounds(bean.leagueid);
+		Collections.sort(originalRounds);
+		
+		LeagueRepresentation leagueRepresentation = new LeagueRepresentation(league.getLeagueid(),originalRounds);
+		return leagueRepresentation;
 	}
 }

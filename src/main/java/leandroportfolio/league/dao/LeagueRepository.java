@@ -95,4 +95,14 @@ public class LeagueRepository {
 	public void updateLeague(League league) {
 		em.merge(league);
 	}
+
+	public Long getLatestLeagueId() {
+		Long l = 0L;
+		List<Object[]> list = em.createNativeQuery("select max(leagueid) from LEAGUE").getResultList();
+		for(Object[] objects : list) {
+			l = (Long)objects[0];
+			break;
+		}
+		return l;
+	}
 }

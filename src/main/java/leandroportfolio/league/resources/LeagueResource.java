@@ -4,6 +4,7 @@ import java.util.List;
 
 import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
+import leandroportfolio.league.resources.dto.GetLeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueDTO;
 import leandroportfolio.league.resources.dto.LeagueRepresentation;
 import leandroportfolio.league.resources.dto.LeagueTypeRepresentation;
@@ -53,6 +54,10 @@ public class LeagueResource {
 		return leagueService.createLeague(bean);
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "", method = RequestMethod.GET ,consumes="application/json")
+	public LeagueRepresentation getLeague(@RequestBody GetLeagueDTO bean) {
+		return leagueService.getLeague(bean);
+	}
 	
 }
