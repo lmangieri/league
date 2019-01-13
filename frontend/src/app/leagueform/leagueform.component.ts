@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RestService } from '../rest.service';
+import { Router } from '@angular/router';
 
 export class Error {
   status : string;
@@ -35,6 +36,20 @@ export class CreateLeagueDTO {
   leagueTypeId : number;
 }
 
+export class LeagueRepresentation {
+  leagueid : number;
+  listRound : Round[];
+}
+
+export class Round {
+  leagueid : number;
+  nick1 : string;
+  score1 : number;
+  nick2 : string;
+  score2 : number;
+  order : number;
+}
+
 @Component({
   selector: 'app-leagueform',
   templateUrl: './leagueform.component.html',
@@ -44,6 +59,7 @@ export class CreateLeagueDTO {
 export class LeagueformComponent implements OnInit {
   leagueTypeRepresentation : LeagueTypeRepresentation;
   
+
   errorIsValidNick : Error;
   errorCreateLeague : Error;
 
@@ -54,7 +70,7 @@ export class LeagueformComponent implements OnInit {
 
   listNicks: string[];
 
-  constructor(private fb: FormBuilder, private rService: RestService) { }
+  constructor(private fb: FormBuilder, private rService: RestService, private router: Router) { }
 
   ngOnInit() {
     this.leagueTypeRepresentation = new LeagueTypeRepresentation();
@@ -91,7 +107,6 @@ export class LeagueformComponent implements OnInit {
 
   addNick() {
 
-
     if(this.leagueForm.value.nick == '') {
       this.errorIsValidNick.message = 'Nick is empty';
       return 1;
@@ -126,9 +141,11 @@ export class LeagueformComponent implements OnInit {
     createLeagueDTO.nicks = this.listNicks;
     createLeagueDTO.leagueTypeId = this.leagueForm.value.leagueTypeId;
     this.restService.createLeague(createLeagueDTO).subscribe(
-       (data) => {
-
+       (data : LeagueRepresentation) => {
         this.errorCreateLeague.clean();
+
+        this.restService.setCurrentLeagueId(data.leagueid);
+        this.router.navigateByUrl('/openleague');
        },
        (err) => {
         this.errorCreateLeague.assign(err.error);

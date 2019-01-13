@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserformComponent } from './userform/userform.component';
 import { LeagueformComponent} from './leagueform/leagueform.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { OpenleagueComponent } from './openleague/openleague.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'rankingForm',
     component: RankingComponent
+  },
+  {
+    path: 'openleague',
+    component: OpenleagueComponent
   }
 ];
 

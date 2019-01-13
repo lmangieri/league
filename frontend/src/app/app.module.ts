@@ -15,7 +15,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LeagueformComponent } from './leagueform/leagueform.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RankingComponent } from './ranking/ranking.component';  
+import { RankingComponent } from './ranking/ranking.component';
+import { OpenleagueComponent } from './openleague/openleague.component';  
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RankingComponent } from './ranking/ranking.component';
     UserformComponent,
     SidebarComponent,
     LeagueformComponent,
-    RankingComponent
+    RankingComponent,
+    OpenleagueComponent
   ],
   imports: [
     BrowserModule,

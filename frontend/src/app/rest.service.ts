@@ -8,7 +8,10 @@ import { UserFormError } from './userform/userform.component';
 import { environment } from 'src/environments/environment';
 import { PlayerScoreInfo, RankingRepresentation } from './ranking/ranking.component';
 import { WebDriverLogger } from 'blocking-proxy/built/lib/webdriver_logger';
+import { LeagueRepresentation } from './leagueform/leagueform.component';
 import { CreateLeagueDTO } from './leagueform/leagueform.component';
+
+import { OnInit } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,13 +22,31 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class RestService {
+export class RestService  implements OnInit {
+  currentLeagueId : number;
   httpClient : HttpClient;
   messageSuccess : string;
   
   httpBase = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    console.info('RestService - ngOnInit was called');
+    this.currentLeagueId = 0;
+  }
+
+  getCurrentLeagueId() {
+    console.info('RestService - getCurrentLeagueId was called');
+    console.info(this.currentLeagueId);
+    return this.currentLeagueId;
+  }
+
+  setCurrentLeagueId(currentLeagueId : number) {
+    console.info('RestService - setCurrentLeagueId was called');
+    console.info(currentLeagueId);
+    this.currentLeagueId = currentLeagueId;
+  }
 
   registerUser(userFormValue : string, userFormError : UserFormError) {
     this.http.post<User>(this.httpBase+'/leagueapp/service/player',userFormValue,httpOptions )
@@ -53,6 +74,6 @@ export class RestService {
   }
 
   createLeague(createLeagueDTO : CreateLeagueDTO) {
-    return this.http.post<CreateLeagueDTO>(this.httpBase+'/leagueapp/service/league',createLeagueDTO, httpOptions);
+    return this.http.post<LeagueRepresentation>(this.httpBase+'/leagueapp/service/league',createLeagueDTO, httpOptions);
   }
 }
