@@ -10,4 +10,5 @@ public class ConstantsMessageError {
 	public static String LEAGUE_IS_ALREADY_CLOSED = "League is already closed, cannot modify it";
 	public static String INVALID_NUMBER_OF_ROUNDS = "Invalid number of rounds";
 	public static String ROUND_IS_DIFFERENT_FROM_ORIGINAL = "Round is different from original";
+	public static String INVALID_LONG = "Invalid format id";
 }

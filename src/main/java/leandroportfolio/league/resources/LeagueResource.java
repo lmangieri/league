@@ -2,6 +2,8 @@ package leandroportfolio.league.resources;
 
 import java.util.List;
 
+import leandroportfolio.league.handler.exceptions.ConstantsMessageError;
+import leandroportfolio.league.handler.exceptions.LeagueCreationException;
 import leandroportfolio.league.model.LeagueType;
 import leandroportfolio.league.resources.dto.CreateLeagueDTO;
 import leandroportfolio.league.resources.dto.GetLeagueDTO;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -56,9 +59,19 @@ public class LeagueResource {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/{leagueId}", method = RequestMethod.GET )
-	public LeagueRepresentation getLeague(@PathVariable("leagueId") Long leagueId) {
-		return leagueService.getLeague(leagueId);
+	@RequestMapping(value = "", method = RequestMethod.GET )
+	public LeagueRepresentation getLeague(@RequestParam("leagueId") String leagueId) {
+		
+		Long l = null;
+		try {
+			if(leagueId != null) {
+				l = Long.parseLong(leagueId);
+			}
+		} catch (NumberFormatException e) {
+			throw new LeagueCreationException(ConstantsMessageError.INVALID_LONG);
+		}
+		
+		return leagueService.getLeague(l);
 	}
 	
 }
