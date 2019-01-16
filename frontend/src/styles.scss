@@ -37,6 +37,42 @@ color: white;
 }
 
 
+#todos{
+    width:100%;
+    height:30px;
+    //background-color:purple;
+}
+
+
+#div1{
+ width:18%;
+ height:100px;
+ float: left;
+}
+#div2{
+    width:30%; //
+   height:100px;
+   float: left; 
+}
+#div3{
+    height:100px;
+  width:18%;
+  float: left; 
+}
+#div4{
+    width:30%;//
+   height:100px;
+   float: left; 
+}
+
+#div5{
+    height:100px;
+    width:4%;
+  float: left; 
+}
+
+
+
 
 #container {
    display: grid;
