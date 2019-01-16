@@ -76,4 +76,13 @@ export class RestService  implements OnInit {
   createLeague(createLeagueDTO : CreateLeagueDTO) {
     return this.http.post<LeagueRepresentation>(this.httpBase+'/leagueapp/service/league',createLeagueDTO, httpOptions);
   }
+
+  getLeague(leagueId : string) {
+    console.info('valueee of leagueId right below '+leagueId);
+    var str = '';
+    if(leagueId.length > 0 ) {
+      str = str.concat('?leagueId='+leagueId);
+    }
+    return this.http.get(this.httpBase+'/leagueapp/service/league'+str);
+  }
 }

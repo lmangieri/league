@@ -1,4 +1,57 @@
-<p>
-  openleague works2!
-</p>
-{{ currentLeagueId }}
+<div *ngIf="!currentLeagueId">
+    <form [formGroup]="openLeagueForm">
+          <mat-form-field>
+            <input matInput placeholder="leagueId" formControlName="leagueId">
+          </mat-form-field>
+
+          <button mat-raised-button (click)="goToLeague()" >
+              <b>Open League </b>
+          </button>
+          <div *ngIf="error.message">
+              <mat-error>
+                  {{ error.message }}
+               </mat-error>
+          </div>
+    </form>
+</div>
+
+
+
+<div *ngIf="currentLeagueId">
+  <form [formGroup]="openLeagueForm2">
+    <h2>Rounds</h2>
+
+      <div id="todos">
+          <div id="div1">Nick</div>
+          <div id="div2">Score</div>
+          <div id="div3">Nick</div>
+          <div id="div4">Score</div>
+          <div id="div5">Round</div>
+      </div>
+
+      <div formArrayName="listRound"  *ngFor="let round of openLeagueForm2.get('listRound').controls; let i = index">
+        <div [formGroupName]="i">
+            <div id="todos">
+                <div id="div1">{{ round.value.nick1 }}</div>
+                <div id="div2">
+                  <mat-form-field>
+                    <input matInput formControlName="score1" placeholder="score"/>
+                  </mat-form-field></div>
+                <div id="div3">
+                  {{ round.value.nick2 }}
+                </div>
+                <div id="div4">
+                  <mat-form-field>
+                    <input matInput formControlName="score2" placeholder="score"/>
+                  </mat-form-field>
+                </div>
+                <div id="div5">
+                  {{ round.value.order }}
+                </div>
+            </div>
+        </div>
+      </div>
+  </form>
+</div>
+
+
