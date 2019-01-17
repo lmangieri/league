@@ -7,6 +7,12 @@ export class LeagueRepresentation {
   listRound : Round[];
 }
 
+export class LeagueDTO {
+  leagueid : number;
+  listRound : Round[];
+  closeLeague : boolean;
+}
+
 export class Round {
   leagueid : number;
   nick1 : string;
@@ -52,6 +58,11 @@ export class OpenleagueComponent implements OnInit {
   constructor(private rService: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.leagueRepresentation = new LeagueRepresentation();
+    this.leagueRepresentation.leagueid = 0;
+    this.leagueRepresentation.listRound = [];
+
+
     // if this.rService.getCurrentLeagueId() has a value
     // it means that it was set after league's creation
     // so user will be redirected imediatelly to the latest league created
@@ -89,22 +100,21 @@ export class OpenleagueComponent implements OnInit {
 
     
     this.openLeagueForm2 = this.fb.group ({
-      listRound : this.fb.array([])
+      listRound : this.fb.array([]),
+      closeLeague : ''
     });
 
 
     console.info('a2');
     var roundList = this.openLeagueForm2.get('listRound') as FormArray;
     console.info('a3');
-    console.info(this.leagueRepresentation.listRound);
-    for (var i = 0; i < this.leagueRepresentation.listRound.length; i++) {
-      console.info('a4');
-      roundList.push(this.createRound(this.leagueRepresentation.listRound[i]));
+    if(this.leagueRepresentation.listRound.length > 0) {
+      for (var i = 0; i < this.leagueRepresentation.listRound.length; i++) {
+        console.info('a4');
+        roundList.push(this.createRound(this.leagueRepresentation.listRound[i]));
+      }
     }
-    console.info('a5');
 
-    console.info('size of roundList = ' + roundList.length);
-    console.info('content of listROundon openLeagueForm2 = ' + this.openLeagueForm2.get('listRound'));
   }
 
 
@@ -120,16 +130,40 @@ export class OpenleagueComponent implements OnInit {
   }
 
   goToLeague() {
-    this.openLeagueForm.value.leagueId;
-
     this.rService.getLeague(this.openLeagueForm.value.leagueId)
     .subscribe(
       (data : LeagueRepresentation) => {
         this.leagueRepresentation = data;
+        this.populateOpenLeagueForm2();
         this.currentLeagueId = data.leagueid;
         this.error.clean();
-        this.populateOpenLeagueForm2();
       },(err) => {
+        this.error.assign(err.error);
+      }
+    );
+  }
+
+  submit() {
+    var leagueDTO = new LeagueDTO();
+    leagueDTO.leagueid = this.leagueRepresentation.leagueid;
+    leagueDTO.closeLeague = this.openLeagueForm2.get('closeLeague').value;
+    var z  = this.openLeagueForm2.get('listRound') as FormArray;
+    leagueDTO.listRound = [];
+    console.info('z.length => '+z.length);
+    for (let i =0 ; i< z.length ; i++) {
+      var v = <Round>z.at(i).value;
+      //var round = new Round();
+      //round.nick1 = v.get('nick1').value;
+
+      console.info(v);
+      leagueDTO.listRound.push(v);
+    }
+
+    this.rService.updateLeague(leagueDTO).subscribe(
+      (data) => {
+        console.info('updatedLeague successfully');
+        this.error.clean();
+      }, (err) => {
         this.error.assign(err.error);
       }
     );

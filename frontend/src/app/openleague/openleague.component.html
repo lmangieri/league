@@ -51,6 +51,20 @@
             </div>
         </div>
       </div>
+      Close League:
+      <select formControlName="closeLeague" class="form-control" id="closeLeague" required>
+          <option  [value]="false">false</option>
+          <option  [value]="true">true</option>
+      </select>
+
+      <button mat-raised-button (click)="submit()" >
+          <b>Submit </b>
+      </button>
+      <div *ngIf="error.message">
+          <mat-error>
+              {{ error.message }}
+           </mat-error>
+      </div>
   </form>
 </div>
 

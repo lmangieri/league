@@ -10,6 +10,7 @@ import { PlayerScoreInfo, RankingRepresentation } from './ranking/ranking.compon
 import { WebDriverLogger } from 'blocking-proxy/built/lib/webdriver_logger';
 import { LeagueRepresentation } from './leagueform/leagueform.component';
 import { CreateLeagueDTO } from './leagueform/leagueform.component';
+import { LeagueDTO } from './openleague/openleague.component';
 
 import { OnInit } from '@angular/core';
 
@@ -75,6 +76,10 @@ export class RestService  implements OnInit {
 
   createLeague(createLeagueDTO : CreateLeagueDTO) {
     return this.http.post<LeagueRepresentation>(this.httpBase+'/leagueapp/service/league',createLeagueDTO, httpOptions);
+  }
+
+  updateLeague(leagueDTO : LeagueDTO ) {
+    return this.http.post<LeagueRepresentation>(this.httpBase+'/leagueapp/service/league/round',leagueDTO, httpOptions);
   }
 
   getLeague(leagueId : string) {
